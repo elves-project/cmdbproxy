@@ -6,7 +6,13 @@
 
     <groupId>cn.gyyx.elves</groupId>
     <artifactId>elves-cmdbproxy</artifactId>
+    <packaging>pom</packaging>
     <version>0.0.1</version>
+    <modules>
+        <module>cmdbproxy-container</module>
+        <module>cmdbproxy-manager</module>
+        <module>cmdbproxy-service</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -178,7 +184,7 @@
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>cn.gyyx.elves.cmdbproxy.entrance.ProgramEntrance</mainClass>
+                                    <mainClass>cn.gyyx.elves.cmdbproxy.ProgramEntrance</mainClass>
                                 </transformer>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
