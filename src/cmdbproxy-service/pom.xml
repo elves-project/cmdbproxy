@@ -19,6 +19,13 @@
 
     <!-- spring framework -->
     <dependencies>
+
+        <dependency>
+            <groupId>cn.gyyx.elves</groupId>
+            <artifactId>cmdbproxy-manager</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>

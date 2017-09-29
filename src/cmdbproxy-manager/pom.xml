@@ -10,6 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>cmdbproxy-manager</artifactId>
+    <version>0.0.1</version>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -107,4 +109,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
 </project>
