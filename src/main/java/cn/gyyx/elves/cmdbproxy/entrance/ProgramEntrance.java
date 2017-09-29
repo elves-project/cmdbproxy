@@ -57,34 +57,27 @@ public class ProgramEntrance {
 	 * @return void    返回类型
 	 */
 	private static void registerZooKeeper() throws Exception{
-		if("true".equalsIgnoreCase(PropertyLoader.ZOOKEEPER_ENABLED)){
-			LOG.info("regist zookeeper ....");
-			ZookeeperExcutor.initClient(PropertyLoader.ZOOKEEPER_HOST,
-					PropertyLoader.ZOOKEEPER_OUT_TIME, PropertyLoader.ZOOKEEPER_OUT_TIME);
-			//创建模块根节点
-			if(null==ZookeeperExcutor.client.checkExists().forPath(PropertyLoader.ZOOKEEPER_ROOT)){
-				ZookeeperExcutor.client.create().creatingParentsIfNeeded().forPath(PropertyLoader.ZOOKEEPER_ROOT);
-			}
-			if(null==ZookeeperExcutor.client.checkExists().forPath(PropertyLoader.ZOOKEEPER_ROOT+"/heartbeat")){
-				ZookeeperExcutor.client.create().creatingParentsIfNeeded().forPath(PropertyLoader.ZOOKEEPER_ROOT+"/heartbeat");
-			}
+        if("true".equalsIgnoreCase(PropertyLoader.ZOOKEEPER_ENABLED)){
+            LOG.info("regist zookeeper ...."+PropertyLoader.ZOOKEEPER_HOST);
+            ZookeeperExcutor zke=new ZookeeperExcutor(PropertyLoader.ZOOKEEPER_HOST,
+                    PropertyLoader.ZOOKEEPER_OUT_TIME, PropertyLoader.ZOOKEEPER_OUT_TIME);
 
-			//创建数据节点
-			if(null==ZookeeperExcutor.client.checkExists().forPath(PropertyLoader.ZOOKEEPER_ROOT+"/heartbeat/agent")){
-				ZookeeperExcutor.client.create().creatingParentsIfNeeded().forPath(PropertyLoader.ZOOKEEPER_ROOT+"/heartbeat/agent");
-			}
+            //创建模块根节点
+            if(null==zke.getClient().checkExists().forPath(PropertyLoader.ZOOKEEPER_ROOT)){
+                zke.getClient().create().creatingParentsIfNeeded().forPath(PropertyLoader.ZOOKEEPER_ROOT);
+            }
+            if(null==zke.getClient().checkExists().forPath(PropertyLoader.ZOOKEEPER_ROOT+"/scheduler")){
+                zke.getClient().create().creatingParentsIfNeeded().forPath(PropertyLoader.ZOOKEEPER_ROOT+"/scheduler");
+            }
 
-			//创建当前模块的临时子节点
-			String nodeName=ZookeeperExcutor.createNode(PropertyLoader.ZOOKEEPER_ROOT+"/heartbeat/", "");
-			LOG.info("create heartbeat module zk ephemeral node,nodeName:"+nodeName);
-			if(null!=nodeName){
-				//添加创建的临时节点监听，断线重连
-				ZookeeperExcutor.addListener(PropertyLoader.ZOOKEEPER_ROOT+"/heartbeat/", "");
-			}else{
-				throw new Exception("create heartbeat module zk ephemeral node fail");
-			}
-			LOG.info("register ZooKeeper success!");
-		}
+            //创建节点
+            String nodeName=zke.createNode(PropertyLoader.ZOOKEEPER_ROOT+"/scheduler/", "");
+            if(null!=nodeName){
+                //添加创建的节点监听，断线重连
+                zke.addListener(PropertyLoader.ZOOKEEPER_ROOT+"/scheduler/", "");
+            }
+            LOG.info("registerZooKeeper success!");
+        }
 	}
 
 	public static void main(String[] args) throws Exception {

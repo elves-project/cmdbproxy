@@ -53,21 +53,21 @@ public class PropertyLoader {
 	//mq exchange
 	public static String MQ_EXCHANGE;
 	
-	//auth mode
-	public static String AUTH_MODE;
+	//thrift.scheduler.port
+	public static int THRIFT_SCHEDULER_PORT;
 	
-	//auth localAppInfo
-	public static String AUTH_LOCAL_APP_INFO;
+	//thrift.agent.port
+	public static int THRIFT_AGENT_PORT;
 	
-	//thrift heartbeat port
-	public static int THRIFT_HEARTBEAT_PORT;
+	//thrift.outTime
+	public static int THRIFT_OUT_TIME;
 
 	static {
 		try {
-			is = new FileInputStream(SpringUtil.PROPERTIES_CONFIG_PATH);
+			is = new FileInputStream(SpringUtil.PROPERTIES_CONFIG_PATH);;
 			properties.load(is);
 
-			ZOOKEEPER_ENABLED=properties.getProperty("zookeeper.enabled");
+			ZOOKEEPER_ENABLED = properties.getProperty("zookeeper.enabled");
 			ZOOKEEPER_HOST = properties.getProperty("zookeeper.host");
     		ZOOKEEPER_OUT_TIME =Integer.parseInt(properties.getProperty("zookeeper.outTime"));
     		ZOOKEEPER_ROOT = properties.getProperty("zookeeper.root");
@@ -78,9 +78,10 @@ public class PropertyLoader {
     		MQ_PASSWORD = properties.getProperty("mq.password");
     		MQ_EXCHANGE = properties.getProperty("mq.exchange");
     		
-    		AUTH_MODE= properties.getProperty("auth.mode");
-    		AUTH_LOCAL_APP_INFO= properties.getProperty("auth.localAppInfo");
-    		THRIFT_HEARTBEAT_PORT= Integer.parseInt(properties.getProperty("thrift.heartbeat.port"));
+    		THRIFT_SCHEDULER_PORT = Integer.parseInt(properties.getProperty("thrift.scheduler.port"));
+    		THRIFT_AGENT_PORT = Integer.parseInt(properties.getProperty("thrift.agent.port"));
+    		THRIFT_OUT_TIME = Integer.parseInt(properties.getProperty("thrift.outTime"));
+    		
 		} catch (IOException e) {
 			LOG.error(ExceptionUtil.getStackTraceAsString(e));
 		}
