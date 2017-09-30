@@ -3,6 +3,8 @@ package cn.gyyx.elves.cmdbproxy.service.impl;
 import cn.gyyx.elves.cmdbproxy.service.CmdbproxyService;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 /**
  * @Author : east.Fu
  * @Description :
@@ -10,4 +12,14 @@ import org.springframework.stereotype.Service;
  */
 @Service("elvesConsumerService")
 public class CmdbproxyServiceImpl implements CmdbproxyService{
+
+
+    @Override
+    public Map<String, Object> getAgentInfoUril() {
+
+
+        return null;
+    }
+
+
 }
