@@ -1,5 +1,7 @@
 package cn.gyyx.elves.cmdbproxy.service;
 
+import java.util.Map;
+
 /**
  * @Author : east.Fu
  * @Description :
@@ -7,4 +9,5 @@ package cn.gyyx.elves.cmdbproxy.service;
  */
 public interface ManagerService {
 
+    public Map<String,Object> process();
 }
